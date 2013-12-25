@@ -1,0 +1,33 @@
+{
+	"manifest_version": 2,
+
+	"name": "Tolerable Tumblr",
+	"description": "Make Tumblr Tolerable.",
+	"version": "0.0.1",
+
+	"background": {
+		"scripts": [
+			"find_tabs.js" // This finds tumblr tabs to add the page_action to.
+		],
+		"run_at": "document_end",
+		"persistent": false
+	},
+
+	"content_scripts": [{
+		"matches": ["*://www.tumblr.com/dashboard*"],
+		"js": ["filter.js"],
+		"css": ["filter.css"]
+	}],
+
+	"page_action": {
+		"default_title": "Tolerable Tumblr",
+		"default_popup": "settings.html"
+	},
+
+	"permissions": [
+		"https://www.tumblr.com/dashboard/",
+		"http://www.tumblr.com/dashboard/",
+		"contextMenus",
+		"webNavigation"
+	]
+}
