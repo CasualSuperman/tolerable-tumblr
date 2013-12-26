@@ -34,3 +34,23 @@ chrome.contextMenus.create({
 		title: "Filter Tag from this User",
 	});
 });
+
+chrome.runtime.onMessage.addListener(function(req) {
+	switch (req.type) {
+	case "tagHover":
+		chrome.contextMenus.update("add_tag", {
+			title: "Filter " + req.tag,
+		});
+		chrome.contextMenus.update("add_tag_by_user", {
+			title: "Filter " + req.tag + " from " + req.user,
+		});
+	case "idToUserName":
+		debugger;
+		var filteredIds = JSON.parse(localStorage["filterIds"]);
+		if (filteredIds.indexOf(req.id) !== -1) {
+			var idMap = JSON.parse(localStorage["ids"]);
+			idMap[req.id] = req.name;
+			localStorage["ids"] = JSON.stringify(idMap);
+		}
+	}
+});
