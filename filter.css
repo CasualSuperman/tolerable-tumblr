@@ -1,4 +1,4 @@
-.post_container.tolerable-hidden .post {
+li.post_container.tolerable-hidden .post {
 	background-color: transparent;
 	border: 1px solid white;
 	color: white;
@@ -7,21 +7,21 @@
 	transition: background-color 0.25s, padding 0.25s;
 }
 
-.post_container.tolerable-hidden .post:hover {
+li.post_container.tolerable-hidden .post:hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
-.post_container:not(.tolerable-hidden) .tolerable-msg {
+li.post_container:not(.tolerable-hidden) .tolerable-msg {
 	display: block;
 }
 
-.post_container.tolerable-hidden .post .post_avatar,
-.post_container.tolerable-hidden .post .post_wrapper,
-.post_container:not(.tolerable-hidden) .tolerable-msg {
+li.post_container.tolerable-hidden .post .post_avatar,
+li.post_container.tolerable-hidden .post .post_wrapper,
+li.post_container:not(.tolerable-hidden) .tolerable-msg {
 	display: none;
 }
 
-.post_container.tolerable-hidden .post .tolerable-msg {
+li.post_container.tolerable-hidden .post .tolerable-msg {
 	font-size: 12px;
 	padding: 0 20px;
 }
@@ -33,12 +33,12 @@
 	-webkit-transform: rotateY(180deg);
 }
 
-.post_container {
+li.post_container {
 	transition: 1s -webkit-transform;
 }
 
 /* Remove the avatar when flipped. */
-.post_container .post_avatar {
+li.post_container .post_avatar {
 	transition: 0.5s opacity;
 }
 .tolerable-flipped .post_avatar {

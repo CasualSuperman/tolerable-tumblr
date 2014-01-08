@@ -190,5 +190,5 @@ var config = {
 	childList: true,
 };
 
-handlePosts(document.querySelectorAll("#posts .post_container"));
+handlePosts(document.querySelectorAll("#posts > .post_container"));
 observer.observe(document.getElementById("posts"), config);
