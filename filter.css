@@ -34,7 +34,7 @@ li.post_container.tolerable-hidden .post .tolerable-msg {
 }
 
 li.post_container {
-	transition: 1s -webkit-transform;
+	transition: 1s -webkit-transform, 1s height;
 }
 
 /* Remove the avatar when flipped. */

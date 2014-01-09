@@ -97,12 +97,19 @@ function updateBack(user, tags) {
 }
 
 function flip() {
+	this.style.height = this.clientHeight + "px";
 	var has = this.classList.toggle("tolerable-flipped");
 	this.classList.add("tolerable-flipping");
+	if (!has) {
+		this.style.height = this.querySelector(".post_full").clientHeight + "px";
+	} else {
+		this.style.height = this.querySelector(".tolerable-post_back").clientHeight + "px";
+	}
 	setTimeout((function() {
 		this.classList.remove("tolerable-flipping");
 		if (!has) {
 			this.removeChild(this.querySelector(".tolerable-post_back"));
+			this.style.height = "";
 		}
 	}).bind(this), 1000);
 }
