@@ -1,3 +1,11 @@
+.post_full .post_control.filter::after {
+	background: url("chrome-extension://__MSG_@@extension_id__/images/filter.png");
+	margin-right: -3px;
+}
+
+/* ==================== */
+/* === Hidden Posts === */
+/* ==================== */
 li.post_container.tolerable-hidden .post {
 	background-color: transparent;
 	border: 1px solid white;
@@ -56,6 +64,10 @@ li.post_container .post_avatar {
 	position: absolute;
 	transition: 1s opacity;
 	visibility: hidden;
+}
+
+.tolerable-post_back h2 {
+	margin-top: 0;
 }
 
 /* Show it when we're flipped. */

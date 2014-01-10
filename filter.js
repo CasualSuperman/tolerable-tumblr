@@ -91,11 +91,6 @@ function inflateHTML(root, context) {
     }
 }
 
-function updateBack(user, tags) {
-	var instance = backTemplate.replace("{{user}}", user);
-	var tags = document.createDocumentFragment();
-}
-
 function flip() {
 	this.style.height = this.clientHeight + "px";
 	var has = this.classList.toggle("tolerable-flipped");
@@ -104,6 +99,7 @@ function flip() {
 		this.style.height = this.querySelector(".post_full").clientHeight + "px";
 	} else {
 		this.style.height = this.querySelector(".tolerable-post_back").clientHeight + "px";
+		this.querySelector(".tolerable-post_back button").addEventListener("click", checkFlipTarget.bind(this));
 	}
 	setTimeout((function() {
 		this.classList.remove("tolerable-flipping");
@@ -115,17 +111,15 @@ function flip() {
 }
 
 function checkFlipTarget(e) {
-	if (e.toElement === this || Array.prototype.indexOf.call(this.children, e.toElement) !== -1) {
-		if (!this.querySelector(".tolerable-post_back")) {
-			var node = inflateHTML(backTemplate, {
-				"user": this.firstChild.dataset.tumblelogName,
-				"tags": Array.prototype.map.call(getTags(this), function(tag) {
-					return tag.textContent;
-			})});
-			this.appendChild(node);
-		}
-		setTimeout(flip.bind(this), 30);
+	if (!this.querySelector(".tolerable-post_back")) {
+		var node = inflateHTML(backTemplate, {
+			"user": this.firstChild.dataset.tumblelogName,
+			"tags": Array.prototype.map.call(getTags(this), function(tag) {
+				return tag.textContent;
+		})});
+		this.appendChild(node);
 	}
+	setTimeout(flip.bind(this), 30);
 }
 
 function createHiddenMsg() {
@@ -145,7 +139,6 @@ function getTags(post) {
 function handlePosts(nodeList) {
 	Array.prototype.forEach.call(nodeList, function(post) {
 		if (post.id === "new_post_buttons") return;
-		post.addEventListener("click", checkFlipTarget);
 		var id = post.firstChild.dataset.tumblelogKey;
 		if (!idsToUserNames[id]) {
 			idsToUserNames[id] = post.firstChild.dataset.tumblelogName;
@@ -155,6 +148,11 @@ function handlePosts(nodeList) {
 				"name": idsToUserNames[id],
 			});
 		}
+		var actions = post.querySelector(".post_controls_inner");
+		var filterButton = document.createElement("a");
+		actions.insertBefore(filterButton, actions.firstChild);
+		filterButton.classList.add("post_control", "filter");
+		filterButton.addEventListener("click", checkFlipTarget.bind(post));
 		var tags = getTags(post);
 		Array.prototype.forEach.call(tags, function(tag) {
 			tag.addEventListener("mouseover", function() {

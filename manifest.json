@@ -29,5 +29,8 @@
 		"http://www.tumblr.com/dashboard/",
 		"contextMenus",
 		"webNavigation"
+	],
+	"web_accessible_resources": [
+		"images/filter.png"
 	]
 }
